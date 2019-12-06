@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">simpleTestMobile</string>
+    <string name="facebook_app_id">592412071510830</string>
+    <string name="fb_login_protocol_scheme">fb592412071510830</string>
+</resources>
