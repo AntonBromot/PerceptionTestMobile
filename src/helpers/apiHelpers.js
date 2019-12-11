@@ -64,15 +64,12 @@ const getAllDataFromRoute = route => new Promise( ( res, rej ) => {
 
         const values = [...prevValues, ...result.results]
 
-        if (!result.next || page >= 3) return res( values )
+        if (!result.next) return res( values )
         getPage(values, page + 1)
     }
 
     getPage()
 })
-
-
-
 
 const filterFieldsByRows = ( fields={}, rows={}, arrayRows={} ) => {
     const schemaKeys = Object.keys( rows ),

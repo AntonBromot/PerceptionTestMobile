@@ -51,8 +51,9 @@ export const AutocompliedWrapper = styled(Animated.View)`
 `
 
 export const AutocompliedWrapperScrool = styled(Animated.ScrollView)`
-   width: 100%;
-   overflow: hidden;
+
+width: 100%;
+  overflow: hidden;
    position: absolute;
    top: 50px;
    left: 0;

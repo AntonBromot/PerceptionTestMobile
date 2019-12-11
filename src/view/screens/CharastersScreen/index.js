@@ -45,7 +45,6 @@ const actionSheetCallback = async ( index, id, updateCharaster ) => {
             try {
                 image = await openGalery()
                 updateCharaster(id, { avatar: image.path })
-
             } catch (e) {
                 console.log(e)
             }
@@ -56,7 +55,6 @@ const actionSheetCallback = async ( index, id, updateCharaster ) => {
             try {
                 image = await openCameraPhoto()
                 updateCharaster(id, { avatar: image.path })
-
             } catch (e) {
                 console.log(e)
             }
@@ -80,10 +78,15 @@ const onRefreshCallback = ( offset, loading, getCharasters, setLoading ) => {
 }
 
 const searchHandlerCallback = async ( text, setAutocomplitValues ) => {
-    if ( !text ) return  setAutocomplitValues([])
-    const data = await getCharastersByName({ name: text })
+    if (!text) return setAutocomplitValues([])
 
-    setAutocomplitValues(data)
+    let data = []
+    try {
+        data = await getCharastersByName({ name: text })
+    } catch (e) {
+        console.log(e)
+    }
+    setAutocomplitValues( data )
 }
 
 const CharastersScreen = ({ collections, fetching, firstEntry, favoritesIds, getFavorites, getCharasters, updateCharaster }) => {
@@ -91,9 +94,9 @@ const CharastersScreen = ({ collections, fetching, firstEntry, favoritesIds, get
           [ idForAction, setIdForAction ] = useState(null),
           actionSheet = useRef(null),
           [ loading, setLoading ] = useState( false ),
-          [ autocomplitValues, setAutocomplitValues ] = useState([]),
+          [ searchedData, setSearchedData ] = useState([]),
+          searchHandler = useCallback( text => searchHandlerCallback( text, setSearchedData ), []),
           onScroll = Animated.event( [{ nativeEvent: { contentOffset: { y: scrollY } } }] ),
-          searchHandler = useCallback( text => searchHandlerCallback( text, setAutocomplitValues ), []),
           memoFooter = useMemo( () => <FooterComponent { ...{ fetching: fetching || loading, firstEntry } } />, [fetching, loading, firstEntry] ),
           showActionSheet = useCallback( id => { setIdForAction(id); actionSheet.current.show() }, [] ),
           actionSheetFunc = useCallback(   ( index )  =>  actionSheetCallback( index, idForAction, updateCharaster  ), [ idForAction] ),
@@ -113,7 +116,7 @@ const CharastersScreen = ({ collections, fetching, firstEntry, favoritesIds, get
     return (
         <ImageBackground source={ IMAGES.charastersBackground } >
             <KeyboardAvoidingView>
-                <SearchBar searchHandler={searchHandler} autocomplitValues={autocomplitValues} />
+                <SearchBar showAutocompliet  { ...{ searchHandler, autocomplitValues: searchedData } } />
                 <FavoritesAnimatedLink { ...{ scrollY } } />
                 <FlatList  data={ collections }
                            contentContainerStyle={{  marginTop: HEADER_MAX_HEIGHT, paddingBottom: HEADER_MAX_HEIGHT+60  }}

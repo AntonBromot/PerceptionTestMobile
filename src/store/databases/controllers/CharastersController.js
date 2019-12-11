@@ -100,8 +100,8 @@ export const getCharastersByName = ({ name }) => new Promise( async ( res, rej )
     try {
         const realm = await Realm.open(databaseOptions)
         realm.write( () => {
-            const dbCharasters = realm.objects(CHARASTERS_SCHEMA_NAME ).filtered(`name BEGINSWITH "${name}"`)
-            charasters = [ ...dbCharasters ].slice(0, 5)
+            const dbCharasters = realm.objects(CHARASTERS_SCHEMA_NAME ).filtered(`name LIKE "*${name}*?"`)
+            charasters = [ ...dbCharasters ]
             charasters = charasters.map( item => filterFieldsByRows( { ...item }, CHARASTERS_SCHEMA_PROPS, CHARASTERS_SCHEMA_ARRAY_PROPS ) )
         } )
     } catch (e) {

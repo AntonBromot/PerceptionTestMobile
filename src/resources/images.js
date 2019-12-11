@@ -4,7 +4,8 @@ const IMAGES = {
     favoritesBackground: require("./images/favorites_bg.jpg"),
     defaultAvatar: require("./images/defaultAvatar.png"),
     favoriteLink: require("./images/fevoriteLink.jpg"),
-    loading: require("./images/loading.gif")
+    loading: require("./images/loading.gif"),
+    searchLoad: require("./images/searchLoad.gif")
 }
 
 export default IMAGES
