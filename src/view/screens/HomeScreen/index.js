@@ -36,15 +36,8 @@ const HomeScreen = ({ navigation }) => {
                                 else if (result.isCancelled) console.log("login is cancelled.");
                                 else AccessToken.getCurrentAccessToken().then((data) => { console.log(data) } )
                             }}
-                            onLogoutFinished={() => console.log("logout.")}/>
-                <LinkedinWrapper>
-                    <LinkedInModal  shouldGetAccessToken={false}
-                                    clientSecret="M1Y1wX4XLTVcLTBu"
-                                    clientID="77aaltwp012vlx"
-                                    redirectUri="https://www.linkedin.com/developers/apps"
-                                    onSuccess={  authentication_code  => console.log(authentication_code)} />
-                </LinkedinWrapper>
-
+                            onLogoutFinished={() => console.log("logout.")}
+                />
             </Container>
         </>
     )}
