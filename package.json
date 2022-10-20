@@ -20,7 +20,7 @@
     "react-native-image-crop-picker": "^0.26.1",
     "react-native-linkedin": "^2.1.1",
     "react-native-permissions": "^2.0.6",
-    "react-native-reanimated": "^1.4.0",
+    "react-native-reanimated": "^2.10.0",
     "react-native-screens": "^1.0.0-alpha.23",
     "react-native-splash-screen": "^3.2.0",
     "react-native-swipeable": "^0.6.0",
